@@ -6,22 +6,11 @@ import os
 st.set_page_config(page_title="NutriVeggie Chatbot 🤖")
 
 # Replicate Credentials
-with st.sidebar:
-    st.title('NutriVeggie Chatbot 🤖')
-    if 'REPLICATE_API_TOKEN' in st.secrets:
-        replicate_api = st.secrets['REPLICATE_API_TOKEN']
-    else:
-        replicate_api = st.text_input('Enter Replicate API token:', type='password')
-        if not (replicate_api.startswith('r8_') and len(replicate_api)==40):
-            st.warning('')
-        else:
-            st.success('')
-    os.environ['REPLICATE_API_TOKEN'] = replicate_api
-
-    st.subheader('Parameters')
-    temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.1, step=0.01)
-    top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
-    max_length = st.sidebar.slider('max_length', min_value=0, max_value=5000, value=2500, step=8)
+st.title('NutriVeggie Chatbot 🤖')
+st.subheader('Parameters')
+temperature = st.sidebar.slider('temperature', min_value=0.01, max_value=5.0, value=0.1, step=0.01)
+top_p = st.sidebar.slider('top_p', min_value=0.01, max_value=1.0, value=0.9, step=0.01)
+max_length = st.sidebar.slider('max_length', min_value=0, max_value=5000, value=2500, step=8)
 
 # Store LLM generated responses
 if "messages" not in st.session_state.keys():
